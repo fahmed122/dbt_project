@@ -1,0 +1,25 @@
+fah_dbt_youtube:
+  target: dev
+  outputs:
+    dev:
+      type: databricks
+      host: 
+      http_path: 
+      token: <your_token_here>
+      catalog: dbt_tutorial_dev
+      schema: default
+      threads: 1
+  
+
+
+    outputs:
+    prod:
+      type: databricks
+      host: 
+      http_path: 
+      token: <your_token_here>
+      catalog: dbt_tutorial_prod
+      schema: default
+      threads: 1
+  
+  target: dev

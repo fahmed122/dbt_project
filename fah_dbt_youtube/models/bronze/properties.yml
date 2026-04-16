@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: bronze_date #  Must match the filename of a model -- including case sensitivity.
+    config:
+        materialized: view
+        schema: bronze
+
+  - name: bronze_products #  Must match the filename of a model -- including case sensitivity.
+    config:
+        materialized: view
+
+
+  - name: bronze_sales #
+    columns:
+      - name: sales_id
+        data_tests:
+          - unique
+          - not_null      Must match the filename of a model -- including case sensitivity.
+      - name: gross_amount
+        data_tests:
+          - generic_non_negative
+  - name: bronze_store
+    columns:
+      - name: store_sk
+        data_tests:
+          - unique
+          - not_null
+
+      - name: store_name
+        data_tests:
+          - accepted_values:
+              values:
+                - MegaMart Manhattan
+                - MegaMart Brooklyn
+                - MegaMart Queens
+                - MegaMart Bronx
+                - MegaMart Staten Island
+              severity: warn
+      - name: country
+        data_tests:
+          - accepted_values:
+              values:
+                - USA
+                - Canada
+              severity: warn
